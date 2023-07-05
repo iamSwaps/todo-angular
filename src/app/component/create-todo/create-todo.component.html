@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Create new todo</h1>
+<mat-dialog-content [formGroup]="createTodo">
+        
+      
+        <mat-form-field>
+            <mat-label>Write the todo</mat-label>
+            <input matInput placeholder="Ex. Go to Gym" formControlName="todo">
+        </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button (click)="close()">Close</button>
+    <button mat-raised-button (click)="save()" [disabled]="!createTodo.valid">Save</button>
+</mat-dialog-actions>
+

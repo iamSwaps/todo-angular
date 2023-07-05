@@ -1,0 +1,13 @@
+<mat-progress-bar *ngIf="!isData" mode="indeterminate"></mat-progress-bar>
+<div  *ngIf="isData">
+    <div>
+        <button mat-raised-button (click)="createTodoDialog()">Add Todo</button>
+    </div>
+    
+    <div *ngFor="let todo of todos">
+        <app-todo [todo]="todo" (refresh)="refresh()"></app-todo>
+    </div>
+    
+</div>
+
+

@@ -1,0 +1,12 @@
+<mat-card [ngClass]="{'mat-card-completed':todo.completed}">
+    <mat-card-content>
+        <mat-checkbox [(ngModel)]="todo.completed" (ngModelChange)="completeTodo()"></mat-checkbox>
+        {{todo.todo}}
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-flat-button color="warn" (click)="deleteTodo()">
+            <span *ngIf="!deleting">Delete</span>
+            <span *ngIf="deleting"><mat-spinner [diameter]="30"></mat-spinner></span>
+        </button>
+    </mat-card-actions>
+</mat-card>

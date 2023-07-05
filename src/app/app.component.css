@@ -1,0 +1,12 @@
+.spacer {
+    flex: 1 1 auto;
+}
+.mat-drawer{
+  display: flex;
+}
+.mat-drawer-container{
+  flex: 1 1 auto;
+}
+.sidenav{
+  display: flex;
+}

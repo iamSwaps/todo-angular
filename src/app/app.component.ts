@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'todo-angular';
+  
+
+  constructor(
+    private router : Router,
+  ){}
+  home(){
+    this.router.navigate(['/'])
+  }
+  signin():void{
+    this.router.navigate(['/signin'])
+  }
+  signup():void{
+    this.router.navigate(['/signup'])  
+  }
 }
