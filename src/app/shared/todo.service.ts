@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { URI } from 'src/app/utils/app.constants';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Todo } from '../models';
 
 
 @Injectable({
@@ -18,7 +19,7 @@ export class TodoService {
   }
 
   public createTodoByUsername(data:any):Observable<any>{
-    const todoOptions={
+    const todoOptions:Todo={
       username:data.username,
       todo:data.todo,
       completed:false

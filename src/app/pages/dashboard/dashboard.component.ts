@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateTodoComponent } from 'src/app/component/create-todo/create-todo.component';
 import { TodoService } from 'src/app/shared/todo.service';
 import { UserService } from 'src/app/shared/user.service';
+import { Todo } from 'src/app/models';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,7 +16,7 @@ export class DashboardComponent implements OnInit {
   username:any
 
   isData=false;
-  todos:any[]=[];
+  todos:Todo[]=[];
 
   constructor(
     private userService:UserService,

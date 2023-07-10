@@ -23,6 +23,10 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatListModule} from '@angular/material/list';
 
+import { SocialLoginModule, SocialAuthServiceConfig ,GoogleLoginProvider, GoogleSigninButtonModule} from '@abacritt/angularx-social-login';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,9 +54,29 @@ import {MatListModule} from '@angular/material/list';
     MatProgressSpinnerModule,
     MatProgressBarModule,
     MatListModule,
+    SocialLoginModule,
+    GoogleSigninButtonModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '871033984676-f5dn6h6a02ms5psn4dfr46l3hri2ncrr.apps.googleusercontent.com'
+            )
+          }
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
