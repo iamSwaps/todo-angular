@@ -1,29 +1,27 @@
 <mat-toolbar>
-    <button mat-icon-button (click)="drawer.toggle()">
-     <mat-icon>menu</mat-icon>
-   </button>
    <span>My Todo App</span>
    <span class="spacer"></span>
+   <span *ngIf="!isLogin" class="loginStatus">Not logged in</span>
+  <span *ngIf="isLogin" class="loginStatus">Logged In</span>
    <button mat-icon-button (click)="home()">     
     <mat-icon fontIcon="home"></mat-icon>
    </button>
-   <button mat-icon-button>
-     <mat-icon>favorite</mat-icon>
-   </button>
-   <button mat-icon-button>
-    <mat-icon>share</mat-icon>
+  <button mat-icon-button (click)="drawer.toggle()">
+    <mat-icon>menu</mat-icon>
   </button>
 </mat-toolbar>
 <div class="sidenav">
 <mat-drawer-container>
-    <mat-drawer #drawer mode="side" opened>
+    <mat-drawer #drawer mode="side">
       <mat-list>
         <mat-list-item>
-          <a (click)="signin()">Sign In</a>
+          <span *ngIf="!isLogin"><mat-icon>input</mat-icon><a (click)="signin()">Sign In</a></span>
+          <span *ngIf="isLogin"><mat-icon>input</mat-icon><a (click)="signin()">Sign Out</a></span>
+
         </mat-list-item>
         <mat-divider></mat-divider>
         <mat-list-item>
-          <a (click)="signup()">Create Account</a>
+          <mat-icon>developer_mode</mat-icon><a href="https://github.com/iamswaps" target="_blank">About Developer</a>
         </mat-list-item>
       </mat-list>
     </mat-drawer>

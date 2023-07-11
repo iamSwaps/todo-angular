@@ -6,7 +6,11 @@
 }
 .mat-drawer-container{
   flex: 1 1 auto;
+  position: static;
 }
 .sidenav{
   display: flex;
+}
+.loginStatus{
+  font-size: small;
 }

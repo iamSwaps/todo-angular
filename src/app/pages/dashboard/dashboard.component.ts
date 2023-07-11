@@ -5,6 +5,8 @@ import { CreateTodoComponent } from 'src/app/component/create-todo/create-todo.c
 import { TodoService } from 'src/app/shared/todo.service';
 import { UserService } from 'src/app/shared/user.service';
 import { Todo } from 'src/app/models';
+import { SocialUser } from '@abacritt/angularx-social-login';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,29 +15,53 @@ import { Todo } from 'src/app/models';
 })
 export class DashboardComponent implements OnInit {
   @Input()
-  username:any
+  user:SocialUser
 
+  isLogin:boolean;
   isData=false;
   todos:Todo[]=[];
+  snackBarCreateTodoMsg="Todo Added!"
 
   constructor(
     private userService:UserService,
     private todoService:TodoService,
     public dialog: MatDialog,
+    private _snackBar: MatSnackBar
   ){
     
   }
 
   refresh(){
-    this.getAllTodos();
-    console.log(this.username)
+    if(this.isLogin){
+      this.getTodoForUser()
+    }else{
+      this.getAllTodos();
+    }
+    console.log(this.user)
   }
   
   ngOnInit(){
-    this.getAllTodos();
-    this.username=this.userService.getUser()
-    console.log(this.username)
+    this.userService.loggedIn.subscribe(val=>this.isLogin=val)
+    this.initializeApp()
+  }
 
+  initializeApp(){
+    this.user=this.userService.getUser()
+    if(this.isLogin){
+      this.getTodoForUser()
+    }else{
+      this.getAllTodos();
+    }
+    console.log(this.user)
+  }
+
+
+  getTodoForUser(){
+    this.isData=false;
+    this.todoService.getTodosByUser(this.user).subscribe((result)=>{
+      this.todos=result;
+      this.isData=true;
+    })
   }
 
   getAllTodos(){
@@ -50,14 +76,17 @@ export class DashboardComponent implements OnInit {
     const dialogRef = this.dialog.open(CreateTodoComponent,
       {
         data:{
-          username:this.username
+          user:this.user
         }
       });
     dialogRef.componentInstance.onSave.subscribe(()=>{
       this.refresh();
+      this._snackBar.open(this.snackBarCreateTodoMsg, "OK",{
+        duration: 3000
+      })
     })
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      
     });
   }
 

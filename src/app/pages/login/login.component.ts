@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
+import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { User } from 'src/app/models';
 import { UserService } from 'src/app/shared/user.service';
 
@@ -8,21 +12,28 @@ import { UserService } from 'src/app/shared/user.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   error:any
-  user:FormGroup = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl(''),
-  });
+  user: SocialUser;
+  loggedIn: boolean;
 
   constructor(
+    private router : Router,
     private userService:UserService,
+    private authService: SocialAuthService,
+    private _snackBar: MatSnackBar
   ){}
 
-  loggedIn(){
-    this.userService.userChange(this.user.value['username'])
+  ngOnInit(): void {
+    this.authService.authState.subscribe((user) => {
+      this.userService.login(user);
+      this.router.navigate(['/'])
+      this._snackBar.open(`Signed as ${user.name}`, "OK",{
+        duration: 3000
+      })
+      console.log(this.userService.getUser())
+    });
+    this.userService.loggedIn.subscribe(val=>this.loggedIn=val)
   }
-  submit(){
-    
-  }
+  
 }

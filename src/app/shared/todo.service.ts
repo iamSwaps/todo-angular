@@ -3,6 +3,7 @@ import { URI } from 'src/app/utils/app.constants';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Todo } from '../models';
+import { SocialUser } from '@abacritt/angularx-social-login';
 
 
 @Injectable({
@@ -16,6 +17,10 @@ export class TodoService {
 
   public getAllTodos():Observable<any>{
     return this.http.get<any[]>(URI+'/todos')
+  }
+
+  public getTodosByUser(user:SocialUser):Observable<any>{
+    return this.http.get<any[]>(URI+`/todos/${user.email}`)
   }
 
   public createTodoByUsername(data:any):Observable<any>{

@@ -9,6 +9,9 @@
 </mat-dialog-content>
 <mat-dialog-actions>
     <button mat-raised-button (click)="close()">Close</button>
-    <button mat-raised-button (click)="save()" [disabled]="!createTodo.valid">Save</button>
+    <button mat-raised-button (click)="save()" [disabled]="!createTodo.valid">
+        <span *ngIf="creating"><mat-spinner [diameter]="30"></mat-spinner></span>
+        <span *ngIf="!creating">Save</span>
+    </button>
 </mat-dialog-actions>
 

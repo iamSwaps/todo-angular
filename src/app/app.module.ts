@@ -5,7 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
-import { SignupComponent } from './pages/signup/signup.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { TodoComponent } from './component/todo/todo.component';
 import { CreateTodoComponent } from './component/create-todo/create-todo.component';
@@ -21,6 +20,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatListModule} from '@angular/material/list';
 
 import { SocialLoginModule, SocialAuthServiceConfig ,GoogleLoginProvider, GoogleSigninButtonModule} from '@abacritt/angularx-social-login';
@@ -31,7 +31,6 @@ import { SocialLoginModule, SocialAuthServiceConfig ,GoogleLoginProvider, Google
   declarations: [
     AppComponent,
     LoginComponent,
-    SignupComponent,
     DashboardComponent,
     TodoComponent,
     CreateTodoComponent
@@ -53,6 +52,7 @@ import { SocialLoginModule, SocialAuthServiceConfig ,GoogleLoginProvider, Google
     MatSidenavModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
+    MatSnackBarModule,
     MatListModule,
     SocialLoginModule,
     GoogleSigninButtonModule,
